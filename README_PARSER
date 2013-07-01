@@ -1,0 +1,70 @@
+/*
+ +-------------------------------------------------------------------------+
+ | This program is free software; you can redistribute it and/or           |
+ | modify it under the terms of the GNU General Public License             |
+ | as published by the Free Software Foundation; either version 2          |
+ | of the License, or (at your option) any later version.                  |
+ |                                                                         |
+ | This program is distributed in the hope that it will be useful,         |
+ | but WITHOUT ANY WARRANTY; without even the implied warranty of          |
+ | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           |
+ | GNU General Public License for more details.                            |
+ +-------------------------------------------------------------------------+
+ | Cacti: The Complete RRDTool-based Graphing Solution                     |
+ +-------------------------------------------------------------------------+
+ | http://www.cacti.net/                                                   |
+ +-------------------------------------------------------------------------+
+*/
+/*******************************************************************************
+
+    Author ......... PoP-ES/RNP
+    Home Site ...... http://www.pop-es.rnp.br
+    Program ........ taclog "Taclog plugin log Parser"
+    Version ........ 1.0
+    Purpose ........ Parse Tacacs+ logs
+*******************************************************************************/
+
+taclog_parser.py
+This script reads Tacacs+ log file and put data into database.
+
+##############################
+####### PRE-REQUISITES #####################################################
+
+* Python
+* Postgresql
+* python-psycopg2
+* create user and database
+* create table
+The table must look like that:
+
+CREATE TABLE dados
+(
+  id serial NOT NULL,
+  ip character varying(50),
+  datehour timestamp without time zone,
+  login character varying(30),
+  loginconsole character varying(20),
+  sync character varying(30),
+  type character varying(20),
+  service character varying(30),
+  timezone character varying(20),
+  taskid character varying(30),
+  command character varying(70),
+  elapsedtime character varying(30),
+  privlvl character varying(20),
+  disccause character varying(30),
+  disccauseext character varying(30),
+  presessiontime character varying(30),
+  event character varying(30),
+  reason character varying(30),
+  starttime character varying(30),
+  CONSTRAINT dados_pkey PRIMARY KEY (id )
+)
+
+##############################
+####### INSTALATION ########################################################
+
+Open taclog_parser.py and edit settings on the top. Then, add to cron the line:
+
+* * * * * root python <directoryto script>/taclog_parser.py
+
