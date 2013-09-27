@@ -45,7 +45,7 @@ logger.setLevel(logging.INFO)
 
 
 try:
-	lkfl = lock.lock("/var/log/taclog_lock", timeout=300) # wait at most 5 minutes
+	lkfl = lock.lock("/var/log/taclog_lock", timeout=50) # wait at most 50 seconds
 	logger.info('Took the lock')
 	#open tacacs+ log file
 	fp1 = open('/var/log/tac_plus.acct', 'r')
